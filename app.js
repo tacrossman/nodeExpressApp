@@ -5,12 +5,19 @@ var app = express();
 
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
   app.use(express.bodyParser());
 });
 
 app.get("/", function(req, res){
-  res.render("home.jade", { title: "Building super kick ass web booming apps with node & express" });
+  res.render("home", { title: "Building super kick ass web booming apps with node & express" });
 });
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
+});
+
 
 // app.get("/hi", function(req, res){
 //   var message = [
@@ -44,6 +51,3 @@ app.get("/", function(req, res){
 //   res.send(message);
 // });
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});

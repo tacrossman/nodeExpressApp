@@ -1,4 +1,49 @@
-extends layout
+h1 hellocrossman
+h2= title
 
-block content
-	h2= title
+style
+	li { background: #d6d6d6 }
+
+- var name ="<em>Thomas</em>";
+- var fn = function (){ return "im a little cheeky string"; }
+- var followerCount = 2;
+-var users = [ { name: "thomas", email: "hello@thomascrossman.co.uk"}, { name: "dave", email: "dave@thomascrossman.co.uk"}, { name: "john", email: "john@thomascrossman.co.uk"}, ];
+
+include mixin
+
+ul#nav
+	li.current #{name}
+	li !{ name }
+	li= fn()
+		a(href="/other", rel="nofollow") go to other
+
+ul
+	each user, i in users
+		li #{i + 1}: #{ user.name} &lt;#{user.email}>
+
+ul 
+	each user, i in users
+		mixin userLi(user)
+
+ul 
+	each userObject, i in users
+		include user
+
+p 
+	| this is how we can split text over
+	| a number of different line
+	| testy test
+
+p.
+	i am another way of splitting
+	text over a couple of lines
+	which is nice
+
+p
+	if followerCount === 0
+		| You have no followers.
+	else if followerCount === 1
+		| You have one follower.
+	else
+		| You have #{followerCount} followers.
+

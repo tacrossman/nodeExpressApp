@@ -40,9 +40,28 @@ app.get("/name/:name?", function (req, res){
 	//res.send(req.params.name);
 	//setup default vaule for route
 	res.send(req.param('name', 'No name setup!'));
-	
 });
 
+app.get("/json", function(req, res){
+	//return json data
+	//res.json({ message: "boomting mesage"});
+	//format method
+	res.format({
+		//html response header
+		html: function() { res.send("<h1> Body </h1>"); },
+		//json response header
+		json: function() { res.json( { message: "body"}); },
+		//text response header
+		text: function() { res.send("body"); }
+	});
+});
+
+app.get('/home', function(req, res){
+	//redirect any /home url to root
+	//res.redirect(302, "/");
+	//response status
+	//res.status(302).redirect("/");
+});
 
 // app.get("/hi", function(req, res){
 //   var message = [
